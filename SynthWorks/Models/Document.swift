@@ -14,6 +14,7 @@ class Document: UIDocument {
 
     var fileWrapper: FileWrapper?
 
+    // MARK: - Decoded contents
     lazy var workspace: Workspace = {
         guard fileWrapper != nil,
               let data = decodeFromWrapper(for: "main.aad") as? Workspace
@@ -24,6 +25,7 @@ class Document: UIDocument {
         return data
     }()
 
+    // MARK: - Wrapper encoding/decoding
     private func encodeToWrapper<T: Encodable>(object: T) -> FileWrapper {
         let archiver = NSKeyedArchiver(requiringSecureCoding: false)
         do {
@@ -48,12 +50,13 @@ class Document: UIDocument {
         do {
             let unarchiver = try NSKeyedUnarchiver(forReadingFrom: data)
             unarchiver.requiresSecureCoding = false
-            return unarchiver.decodeObject(forKey: "Data")
+            return unarchiver.decodeDecodable(Workspace.self, forKey: "Data")
         } catch let error {
             fatalError("Unarchiving failed. \(error.localizedDescription)")
         }
     }
 
+    // MARK: - Load/save functions
     override func contents(forType typeName: String) throws -> Any {
         let workspaceWrapper = encodeToWrapper(object: workspace)
         let wrappers: [String: FileWrapper] = ["main.aad": workspaceWrapper]
