@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B3E042326B72BD2007D689F /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E042226B72BD2007D689F /* Workspace.swift */; };
+		8B3E042826B73990007D689F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E042726B73990007D689F /* Logger.swift */; };
 		8BBB5C0026AEFBFD00F2CDC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBB5BFF26AEFBFD00F2CDC1 /* AppDelegate.swift */; };
 		8BBB5C0226AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBB5C0126AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift */; };
 		8BBB5C0426AEFBFD00F2CDC1 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBB5C0326AEFBFD00F2CDC1 /* DocumentViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B3E042226B72BD2007D689F /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
+		8B3E042726B73990007D689F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8BBB5BFC26AEFBFD00F2CDC1 /* SynthWorks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynthWorks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BBB5BFF26AEFBFD00F2CDC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BBB5C0126AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +43,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B3E042426B736C0007D689F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8BBB5C0526AEFBFD00F2CDC1 /* Document.swift */,
+				8B3E042226B72BD2007D689F /* Workspace.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8B3E042526B736CF007D689F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8BBB5C0126AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift */,
+				8BBB5C0326AEFBFD00F2CDC1 /* DocumentViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8B3E042626B73982007D689F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B3E042726B73990007D689F /* Logger.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8BBB5BF326AEFBFD00F2CDC1 = {
 			isa = PBXGroup;
 			children = (
@@ -58,10 +88,10 @@
 		8BBB5BFE26AEFBFD00F2CDC1 /* SynthWorks */ = {
 			isa = PBXGroup;
 			children = (
+				8B3E042526B736CF007D689F /* Controllers */,
+				8B3E042626B73982007D689F /* Extensions */,
+				8B3E042426B736C0007D689F /* Models */,
 				8BBB5BFF26AEFBFD00F2CDC1 /* AppDelegate.swift */,
-				8BBB5C0126AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift */,
-				8BBB5C0326AEFBFD00F2CDC1 /* DocumentViewController.swift */,
-				8BBB5C0526AEFBFD00F2CDC1 /* Document.swift */,
 				8BBB5C0726AEFBFD00F2CDC1 /* Main.storyboard */,
 				8BBB5C0A26AEFBFE00F2CDC1 /* Assets.xcassets */,
 				8BBB5C0C26AEFBFE00F2CDC1 /* LaunchScreen.storyboard */,
@@ -142,7 +172,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BBB5C0626AEFBFD00F2CDC1 /* Document.swift in Sources */,
+				8B3E042826B73990007D689F /* Logger.swift in Sources */,
 				8BBB5C0426AEFBFD00F2CDC1 /* DocumentViewController.swift in Sources */,
+				8B3E042326B72BD2007D689F /* Workspace.swift in Sources */,
 				8BBB5C0226AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift in Sources */,
 				8BBB5C0026AEFBFD00F2CDC1 /* AppDelegate.swift in Sources */,
 			);
