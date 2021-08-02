@@ -6,20 +6,29 @@
 //
 
 import UIKit
+import os
 
 class Document: UIDocument {
+    static let workspaceFileName = "Main.workspace"
+    static let wrapperRootKey = "RootKey"
+    
+    private let logger = Logger(category: "Document")
+    
     override var description: String {
         return fileURL.deletingPathExtension().lastPathComponent
     }
 
-    var fileWrapper: FileWrapper?
+    private var fileWrapper: FileWrapper?
 
     // MARK: - Decoded contents
-    lazy var workspace: Workspace = {
+    public lazy var workspace: Workspace = {
+        logger.info("Getting workspace from file wrapper.")
+        
         guard fileWrapper != nil,
-              let data = decodeFromWrapper(for: "main.aad") as? Workspace
+              let data = decodeFromWrapper(for: Self.workspaceFileName) as? Workspace
         else {
-            fatalError("Unable to decode main workspace from wrapper.")
+            logger.error("Unable to decode main workspace from wrapper since the wrapper is currently nil.")
+            fatalError()
         }
 
         return data
@@ -29,9 +38,10 @@ class Document: UIDocument {
     private func encodeToWrapper<T: Encodable>(object: T) -> FileWrapper {
         let archiver = NSKeyedArchiver(requiringSecureCoding: false)
         do {
-            try archiver.encodeEncodable(object, forKey: "Data")
+            try archiver.encodeEncodable(object, forKey: Self.wrapperRootKey)
         } catch let error {
-            fatalError("Unable to encode object: \(error.localizedDescription)")
+            logger.error("Unable to encode object: \"\(error.localizedDescription)\".")
+            fatalError()
         }
 
         archiver.finishEncoding()
@@ -50,22 +60,29 @@ class Document: UIDocument {
         do {
             let unarchiver = try NSKeyedUnarchiver(forReadingFrom: data)
             unarchiver.requiresSecureCoding = false
-            return unarchiver.decodeDecodable(Workspace.self, forKey: "Data")
+            return unarchiver.decodeDecodable(Workspace.self, forKey: Self.wrapperRootKey)
         } catch let error {
-            fatalError("Unarchiving failed. \(error.localizedDescription)")
+            logger.error("Unarchiving failed: \"\(error.localizedDescription)\".")
+            fatalError()
         }
     }
 
     // MARK: - Load/save functions
     override func contents(forType typeName: String) throws -> Any {
+        logger.info("Getting contents for type \"\(typeName)\".")
         let workspaceWrapper = encodeToWrapper(object: workspace)
-        let wrappers: [String: FileWrapper] = ["main.aad": workspaceWrapper]
+        let wrappers: [String: FileWrapper] = [Self.workspaceFileName: workspaceWrapper]
 
         return FileWrapper(directoryWithFileWrappers: wrappers)
     }
 
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
-        guard let contents = contents as? FileWrapper else { return }
+        logger.info("Loading document from contents.")
+        
+        guard let contents = contents as? FileWrapper else {
+            logger.error("The contents passed aren't convertible to FileWrapper.")
+            return
+        }
 
         fileWrapper = contents
     }

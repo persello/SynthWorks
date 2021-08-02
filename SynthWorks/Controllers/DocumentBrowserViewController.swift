@@ -9,7 +9,7 @@ import os
 import UIKit
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController {
-    private var logger = Logger(category: "DocumentBrowserViewController")
+    private let logger = Logger(category: "DocumentBrowserViewController")
     private var transitionController: UIDocumentBrowserTransitionController?
 
     override func viewDidLoad() {
@@ -93,6 +93,13 @@ extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate
         // Assign the transition delegate and get the appropriate transition controller.
         documentViewController.transitioningDelegate = self
         self.transitionController = transitionController(forDocumentAt: documentURL)
+        
+        // Assign the opened document URL to the AppDelegate, so it can save the document when the application resigns.
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.currentDocument = documentViewController.document
+        } else {
+            logger.error("Unable to get AppDelegate! This will prevent the document from saving when you close the app!")
+        }
 
         present(documentViewController, animated: true, completion: nil)
     }
