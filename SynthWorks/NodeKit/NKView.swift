@@ -1,6 +1,7 @@
 import UIKit
 
 @IBDesignable
+/// The main view for this library: implements an interactive node graph editor.
 public class NKView: UIScrollView {
     private let backgroundGrid: NKGrid! = NKGrid(frame: CGRect(x: 0, y: 0, width: 5000, height: 5000))
     
@@ -16,11 +17,11 @@ public class NKView: UIScrollView {
         configure()
     }
     
-    func render() {
+    private func render() {
         
     }
     
-    func configure() {
+    private func configure() {
         clipsToBounds = true
         minimumZoomScale = 0.25
         maximumZoomScale = 4.0

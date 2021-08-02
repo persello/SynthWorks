@@ -8,43 +8,53 @@
 import UIKit
 
 @IBDesignable
-class NKGrid: UIView {
+/// A square grid, like the ones used in notebooks.
+public class NKGrid: UIView {
+    /// The spacing between the horizontal and vertical lines of the grid.
     @IBInspectable var gridSpacing: CGFloat = 20 {
         didSet {
             grid()
         }
     }
 
-    @IBInspectable var gridThickness: CGFloat = 1 {
+    /// The thickness of the lines that compose the grid.
+    @IBInspectable var gridLineThickness: CGFloat = 1 {
         didSet {
             grid()
         }
     }
 
-    @IBInspectable var gridLineColor: UIColor = UIColor.systemGray4 {
+    /// The color of the lines that compose the grid.
+    @IBInspectable var gridLineColor: UIColor = UIColor.systemGray5 {
         didSet {
             grid()
         }
     }
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
 
         configure()
     }
 
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
 
         configure()
     }
 
-    func configure() {
+    /// Configures the view at initialization or when some properties change.
+    /// It also does the first rendering of the view.
+    private func configure() {
         backgroundColor = UIColor.clear
         grid()
     }
 
-    func grid() {
+    /// Renders a layer containing the view and adds it as a sublayer.
+    /// Removes all the old sublayers.
+    private func grid() {
+        layer.sublayers?.removeAll()
+
         let gridLayer = CAShapeLayer()
         let gridPath = UIBezierPath()
 
@@ -65,10 +75,14 @@ class NKGrid: UIView {
 
         // TODO: Let users customize properties
         gridLayer.strokeColor = gridLineColor.cgColor
-        gridLayer.lineWidth = gridThickness
+        gridLayer.lineWidth = gridLineThickness
 
         gridLayer.path = gridPath.cgPath
 
         layer.addSublayer(gridLayer)
+    }
+
+    public override func layoutSubviews() {
+        grid()
     }
 }
