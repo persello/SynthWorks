@@ -5,43 +5,53 @@
 //  Created by Riccardo Persello on 26/07/21.
 //
 
-import UIKit
 import os
+import UIKit
 
-class Document: UIDocument {
+class Document: UIDocument, Loggable {
     static let workspaceFileName = "Main.workspace"
     static let wrapperRootKey = "RootKey"
-    
-    private let logger = Logger(category: "Document")
-    
+
     override var description: String {
         return fileURL.deletingPathExtension().lastPathComponent
     }
 
     private var fileWrapper: FileWrapper?
+    private var openedWorkspace: Workspace?
 
     // MARK: - Decoded contents
-    public lazy var workspace: Workspace = {
+    public func getWorkspace() throws -> Workspace {
+        if let cachedWorkspace = openedWorkspace {
+            return cachedWorkspace
+        }
+        
         logger.info("Getting workspace from file wrapper.")
         
-        guard fileWrapper != nil,
-              let data = decodeFromWrapper(for: Self.workspaceFileName) as? Workspace
-        else {
-            logger.error("Unable to decode main workspace from wrapper since the wrapper is currently nil.")
-            fatalError()
+        guard fileWrapper != nil else {
+            throw DocumentError.mainWorkspaceDecodingError(reason: "FileWrapper is nil")
         }
-
-        return data
-    }()
+        
+        let data = try decodeFromWrapper(for: Self.workspaceFileName)
+        
+        if let workspace = data as? Workspace {
+            openedWorkspace = workspace
+            return workspace
+        } else {
+            throw DocumentError.mainWorkspaceDecodingError(reason: "Cannot cast workspace to type Workspace")
+        }
+    }
+    
+    public func setWorkspace(_ workspace: Workspace) {
+        openedWorkspace = workspace
+    }
 
     // MARK: - Wrapper encoding/decoding
-    private func encodeToWrapper<T: Encodable>(object: T) -> FileWrapper {
+    private func encodeToWrapper<T: Encodable>(object: T) throws -> FileWrapper {
         let archiver = NSKeyedArchiver(requiringSecureCoding: false)
         do {
             try archiver.encodeEncodable(object, forKey: Self.wrapperRootKey)
         } catch let error {
-            logger.error("Unable to encode object: \"\(error.localizedDescription)\".")
-            fatalError()
+            throw DocumentError.objectEncodingError(innerError: error, object: object)
         }
 
         archiver.finishEncoding()
@@ -49,7 +59,7 @@ class Document: UIDocument {
         return FileWrapper(regularFileWithContents: archiver.encodedData)
     }
 
-    private func decodeFromWrapper(for name: String) -> Any? {
+    private func decodeFromWrapper(for name: String) throws -> Any? {
         guard let allWrappers = fileWrapper,
               let wrapper = allWrappers.fileWrappers?[name],
               let data = wrapper.regularFileContents
@@ -62,15 +72,17 @@ class Document: UIDocument {
             unarchiver.requiresSecureCoding = false
             return unarchiver.decodeDecodable(Workspace.self, forKey: Self.wrapperRootKey)
         } catch let error {
-            logger.error("Unarchiving failed: \"\(error.localizedDescription)\".")
-            fatalError()
+            throw DocumentError.objectDecodingError(innerError: error, key: name)
         }
     }
 
     // MARK: - Load/save functions
     override func contents(forType typeName: String) throws -> Any {
         logger.info("Getting contents for type \"\(typeName)\".")
-        let workspaceWrapper = encodeToWrapper(object: workspace)
+        
+        // Prevent overwrite if workspace is nil
+        let workspace = try getWorkspace()
+        let workspaceWrapper = try encodeToWrapper(object: workspace)
         let wrappers: [String: FileWrapper] = [Self.workspaceFileName: workspaceWrapper]
 
         return FileWrapper(directoryWithFileWrappers: wrappers)
@@ -78,12 +90,22 @@ class Document: UIDocument {
 
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
         logger.info("Loading document from contents.")
-        
+
         guard let contents = contents as? FileWrapper else {
             logger.error("The contents passed aren't convertible to FileWrapper.")
-            return
+            throw DocumentError.contentsAreNotFileWrapper
         }
 
         fileWrapper = contents
+    }
+    
+    // MARK: - Error handling
+    override func handleError(_ error: Error, userInteractionPermitted: Bool) {
+        if userInteractionPermitted {
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            delegate.handle(error, from: nil, retryHandler: nil)
+        } else {
+            logger.error("\(error.localizedDescription)")
+        }
     }
 }

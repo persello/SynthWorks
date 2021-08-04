@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  File
+//  NKGrid.swift
+//  NKGrid
 //
 //  Created by Riccardo Persello on 02/08/21.
 //
@@ -73,16 +73,11 @@ public class NKGrid: UIView {
             gridPath.addLine(to: CGPoint(x: frame.width, y: y))
         }
 
-        // TODO: Let users customize properties
         gridLayer.strokeColor = gridLineColor.cgColor
         gridLayer.lineWidth = gridLineThickness
 
         gridLayer.path = gridPath.cgPath
 
         layer.addSublayer(gridLayer)
-    }
-
-    public override func layoutSubviews() {
-        grid()
     }
 }

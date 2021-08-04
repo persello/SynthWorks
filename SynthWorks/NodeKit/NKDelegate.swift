@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  File
+//  NKDelegate.swift
+//  NKDelegate
 //
 //  Created by Riccardo Persello on 02/08/21.
 //

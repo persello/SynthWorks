@@ -8,8 +8,7 @@
 import os
 import UIKit
 
-class DocumentBrowserViewController: UIDocumentBrowserViewController {
-    private let logger = Logger(category: "DocumentBrowserViewController")
+class DocumentBrowserViewController: UIDocumentBrowserViewController, Loggable {
     private var transitionController: UIDocumentBrowserTransitionController?
 
     override func viewDidLoad() {
@@ -24,12 +23,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController {
 }
 
 extension DocumentBrowserViewController: UIViewControllerTransitioningDelegate {
-    
     // Same transition controller for both presentation and dismissal.
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return transitionController
     }
-    
+
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return transitionController
     }
@@ -45,7 +43,7 @@ extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate
         // Create the document in a temporary folder.
         let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("Untitled.syworkspace")
         let newDocument = Document(fileURL: tempURL)
-        newDocument.workspace = newWorkspace
+        newDocument.setWorkspace(newWorkspace)
 
         logger.info("Created a temporary document at \"\(newDocument.fileURL)\".")
 
@@ -74,33 +72,38 @@ extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate
     func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
         logger.error("Document import for \"\(documentURL.absoluteString)\" failed: \"\(error?.localizedDescription ?? "Unknown error")\".")
 
-        let alert = UIAlertController(title: "An error occurred", message: "During the creation or import of this workspace, the following error occurred: \"\(error?.localizedDescription ?? "Unknown error")\".", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Continue", style: .cancel, handler: { _ in }))
-        present(alert, animated: true)
+        handle(DocumentError.importFailure(error), retryHandler: nil)
     }
 
     // MARK: Document Presentation
 
     func presentDocument(at documentURL: URL) {
         logger.info("Presenting document at URL \"\(documentURL)\".")
-        
+
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let documentViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! DocumentViewController
-        
-        documentViewController.document = Document(fileURL: documentURL)
-        documentViewController.modalPresentationStyle = .fullScreen
-        
+        let navigationController = storyBoard.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
+
+        let document = Document(fileURL: documentURL)
+
+        navigationController.document = document
+        navigationController.modalPresentationStyle = .fullScreen
+
         // Assign the transition delegate and get the appropriate transition controller.
-        documentViewController.transitioningDelegate = self
-        self.transitionController = transitionController(forDocumentAt: documentURL)
-        
+        navigationController.transitioningDelegate = self
+        transitionController = transitionController(forDocumentAt: documentURL)
+
         // Assign the opened document URL to the AppDelegate, so it can save the document when the application resigns.
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            appDelegate.currentDocument = documentViewController.document
+            appDelegate.currentDocument = document
         } else {
             logger.error("Unable to get AppDelegate! This will prevent the document from saving when you close the app!")
+            handle(DocumentError.cannotSaveDocumentInAppDelegate, retryHandler: nil)
         }
 
-        present(documentViewController, animated: true, completion: nil)
+        // Keep track of the change in order to allow AppDelegate-managed alerts to be shown on the correct VC.
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.currentViewController = navigationController
+        
+        present(navigationController, animated: true)
     }
 }

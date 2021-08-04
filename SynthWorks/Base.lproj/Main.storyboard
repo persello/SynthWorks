@@ -3,6 +3,7 @@
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19134"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
         <!--Document Browser View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="DocumentBrowserViewController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DocumentBrowserViewController" id="BYZ-38-t0r" customClass="DocumentBrowserViewController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,23 +24,60 @@
             </objects>
             <point key="canvasLocation" x="26" y="654"/>
         </scene>
-        <!--Document View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="dkP-xk-x6W">
             <objects>
-                <viewController storyboardIdentifier="DocumentViewController" id="M2k-L8-Olo" customClass="DocumentViewController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SIE-Uh-Zny" customClass="NKView" customModule="SynthWorks" customModuleProvider="target">
+                <viewController storyboardIdentifier="MainViewController" id="M2k-L8-Olo" customClass="MainViewController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SIE-Uh-Zny">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2O-qw-fkk" userLabel="Node View" customClass="NKView" customModule="SynthWorks" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="BoZ-jc-2Y8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="g2O-qw-fkk" firstAttribute="trailing" secondItem="SIE-Uh-Zny" secondAttribute="trailing" id="0tn-iV-j5H"/>
+                            <constraint firstItem="g2O-qw-fkk" firstAttribute="leading" secondItem="SIE-Uh-Zny" secondAttribute="leading" id="IlA-fE-hNB"/>
+                            <constraint firstItem="g2O-qw-fkk" firstAttribute="bottom" secondItem="SIE-Uh-Zny" secondAttribute="bottom" id="YVb-ho-f07"/>
+                            <constraint firstItem="g2O-qw-fkk" firstAttribute="top" secondItem="SIE-Uh-Zny" secondAttribute="top" id="fbh-Wk-eMR"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="15U-F0-tfh">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="bn4-3H-tmB">
+                            <imageReference key="image" image="doc" catalog="system"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sG2-01-tf9"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rl9-ES-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1578" y="654"/>
+        </scene>
+        <!--Main Navigation Controller-->
+        <scene sceneID="39S-2K-jTZ">
+            <objects>
+                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Uz1-wd-Te5" customClass="MainNavigationController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yMR-ex-q3M">
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M2k-L8-Olo" kind="relationship" relationship="rootViewController" id="8OR-t4-TWD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uFz-iV-5BH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="705.46875" y="653.90625"/>
         </scene>
     </scenes>
     <resources>
+        <image name="doc" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

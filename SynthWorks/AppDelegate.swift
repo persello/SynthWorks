@@ -9,13 +9,16 @@ import os
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, Loggable {
     var window: UIWindow?
     var currentDocument: Document?
-    private var logger = Logger(category: "AppDelegate")
+    var currentViewController: UIViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        currentViewController = window?.rootViewController
+        
         return true
     }
 
@@ -27,11 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let currentDocument = currentDocument {
             currentDocument.save(to: currentDocument.fileURL, for: .forOverwriting, completionHandler: { success in
                 if !success {
-                    self.logger.error("Can't save the current file before the application will resign.")
+                    self.handle(DocumentError.cannotSaveBeforeResign,
+                                from: (self.window?.rootViewController)!,
+                                retryHandler: nil)
                 }
             })
         } else {
-            logger.warning("There is no current document URL. Shouldn't be a problem as long as there are no open files.")
+            logger.warning("There is no current document saved in AppDelegate. Shouldn't be a problem as long as there are no open files.")
         }
     }
 
