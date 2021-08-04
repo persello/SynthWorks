@@ -47,8 +47,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="15U-F0-tfh">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="bn4-3H-tmB">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="bn4-3H-tmB" userLabel="Document Browser Button">
                             <imageReference key="image" image="doc" catalog="system"/>
+                            <connections>
+                                <action selector="documentBrowserButtonAction:" destination="M2k-L8-Olo" id="wgg-7Z-wDw"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="sG2-01-tf9"/>
                     </navigationItem>

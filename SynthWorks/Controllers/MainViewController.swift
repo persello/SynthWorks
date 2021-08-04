@@ -19,4 +19,9 @@ class MainViewController: UIViewController {
         
         title = document.description
     }
+    
+    @IBAction func documentBrowserButtonAction(_ sender: UIBarButtonItem) {
+        
+        returnToFileBrowserAction?()
+    }
 }
