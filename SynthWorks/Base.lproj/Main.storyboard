@@ -6,6 +6,7 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,10 +25,28 @@
             </objects>
             <point key="canvasLocation" x="26" y="654"/>
         </scene>
+        <!--Main Navigation Controller-->
+        <scene sceneID="39S-2K-jTZ">
+            <objects>
+                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Uz1-wd-Te5" customClass="MainNavigationController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yMR-ex-q3M">
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M2k-L8-Olo" kind="relationship" relationship="rootViewController" id="8OR-t4-TWD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uFz-iV-5BH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="705.46875" y="653.90625"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="dkP-xk-x6W">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="M2k-L8-Olo" customClass="MainViewController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="Main View Controller" id="M2k-L8-Olo" customClass="MainViewController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SIE-Uh-Zny">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,37 +65,116 @@
                             <constraint firstItem="g2O-qw-fkk" firstAttribute="top" secondItem="SIE-Uh-Zny" secondAttribute="top" id="fbh-Wk-eMR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="15U-F0-tfh">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="bn4-3H-tmB" userLabel="Document Browser Button">
+                    <navigationItem key="navigationItem" title="Document Name" id="15U-F0-tfh">
+                        <barButtonItem key="leftBarButtonItem" title="Documents" id="bn4-3H-tmB" userLabel="Document Browser Button">
                             <imageReference key="image" image="doc" catalog="system"/>
                             <connections>
                                 <action selector="documentBrowserButtonAction:" destination="M2k-L8-Olo" id="wgg-7Z-wDw"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sG2-01-tf9"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sG2-01-tf9">
+                            <connections>
+                                <segue destination="sFZ-TA-tgz" kind="presentation" id="zPR-fo-vtN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rl9-ES-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1578" y="654"/>
+            <point key="canvasLocation" x="1428" y="654"/>
         </scene>
-        <!--Main Navigation Controller-->
-        <scene sceneID="39S-2K-jTZ">
+        <!--Node Library Navigation Controller-->
+        <scene sceneID="xOx-7t-odj">
             <objects>
-                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Uz1-wd-Te5" customClass="MainNavigationController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController title="Node Library Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="sFZ-TA-tgz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yMR-ex-q3M">
-                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="prZ-nG-Abs">
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="M2k-L8-Olo" kind="relationship" relationship="rootViewController" id="8OR-t4-TWD"/>
+                        <segue destination="njz-Lm-DYo" kind="relationship" relationship="rootViewController" id="evn-MR-sMS"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uFz-iV-5BH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bBe-Q5-LC0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="705.46875" y="653.90625"/>
+            <point key="canvasLocation" x="2162" y="-2"/>
+        </scene>
+        <!--Node Library Collection View Controller-->
+        <scene sceneID="7Qa-mx-Bmj">
+            <objects>
+                <collectionViewController title="Node Library Collection View Controller" id="njz-Lm-DYo" customClass="NodeLibraryCollectionViewController" customModule="SynthWorks" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MgR-24-z5V">
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="984"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1na-of-qmz">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NodeCell" id="gM2-Tj-mVk" customClass="NodeCell" customModule="SynthWorks" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="264" height="284.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6fo-dU-JLT">
+                                    <rect key="frame" x="0.0" y="0.0" width="264" height="284.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gmg-NL-E3m">
+                                            <rect key="frame" x="12" y="12" width="240" height="260.5"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9P-JG-4Vh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="0zE-AZ-OaU"/>
+                                                        <constraint firstAttribute="height" constant="240" id="Zjn-cK-X7T"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOi-aI-fFN">
+                                                    <rect key="frame" x="0.0" y="240" width="240" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="centerY" secondItem="6fo-dU-JLT" secondAttribute="centerY" id="A1g-vf-kmX"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gmg-NL-E3m" secondAttribute="trailing" constant="12" id="IiJ-Xj-Pzk"/>
+                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6fo-dU-JLT" secondAttribute="leading" constant="12" id="Ozb-yV-GeU"/>
+                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="centerX" secondItem="6fo-dU-JLT" secondAttribute="centerX" id="UhH-Zy-opO"/>
+                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6fo-dU-JLT" secondAttribute="top" constant="12" id="Vdx-zt-Iej"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gmg-NL-E3m" secondAttribute="bottom" constant="12" id="fsF-Bd-fnX"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="nodeNameLabel" destination="OOi-aI-fFN" id="L4P-c4-lQF"/>
+                                    <outlet property="nodeView" destination="D9P-JG-4Vh" id="5h8-tn-VCd"/>
+                                    <outlet property="nodeViewHeightConstraint" destination="Zjn-cK-X7T" id="kDp-HZ-Q5P"/>
+                                    <outlet property="nodeViewWidthConstraint" destination="0zE-AZ-OaU" id="vGc-Mb-pzF"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="njz-Lm-DYo" id="WNH-1p-Ekn"/>
+                            <outlet property="delegate" destination="njz-Lm-DYo" id="OPz-PR-iIJ"/>
+                        </connections>
+                    </collectionView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Add Node" id="Iyk-O1-sXA">
+                        <barButtonItem key="leftBarButtonItem" title="Select" id="wcF-o1-W7h"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="NLl-OF-zAm"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CkM-Vv-JHm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2884" y="-2"/>
         </scene>
     </scenes>
     <resources>

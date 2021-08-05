@@ -8,7 +8,7 @@
 import UIKit
 
 public class TestNode: NKNode {
-    public init(id: UUID = UUID(), position: NKCoordinate, size: NKCoordinate) {
+    required public init(id: UUID = UUID(), position: NKCoordinate, size: NKCoordinate) {
         self.id = id
         self.position = position
         self.size = size

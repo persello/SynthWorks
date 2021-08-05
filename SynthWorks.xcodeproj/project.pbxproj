@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B33360126BAD4B20086D402 /* NodeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B33360026BAD4B20086D402 /* NodeList.swift */; };
+		8B33360326BAD7FE0086D402 /* NodeLibraryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B33360226BAD7FE0086D402 /* NodeLibraryCollectionViewController.swift */; };
 		8B35935F26B9A8B400B7A2D6 /* UIResponder+handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B35935E26B9A8B400B7A2D6 /* UIResponder+handle.swift */; };
 		8B35936126B9A96E00B7A2D6 /* UIViewController+handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B35936026B9A96E00B7A2D6 /* UIViewController+handle.swift */; };
 		8B35936326B9A9F000B7A2D6 /* CategorizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B35936226B9A9F000B7A2D6 /* CategorizedError.swift */; };
@@ -15,6 +17,7 @@
 		8B35936A26B9AC4100B7A2D6 /* DocumentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B35936926B9AC4100B7A2D6 /* DocumentError.swift */; };
 		8B3E042326B72BD2007D689F /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E042226B72BD2007D689F /* Workspace.swift */; };
 		8B3E042826B73990007D689F /* Logger+Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E042726B73990007D689F /* Logger+Loggable.swift */; };
+		8B42E85126BC8DF6009D1B7B /* NodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42E85026BC8DF6009D1B7B /* NodeCell.swift */; };
 		8B4F51E226B93EEA003F9015 /* NKNodeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4F51E126B93EEA003F9015 /* NKNodeViewDelegate.swift */; };
 		8B7EFF5526B947DE00DB2AB8 /* GenericNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7EFF5426B947DE00DB2AB8 /* GenericNode.swift */; };
 		8B85199126B99A720007E01C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85199026B99A720007E01C /* MainViewController.swift */; };
@@ -36,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B33360026BAD4B20086D402 /* NodeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeList.swift; sourceTree = "<group>"; };
+		8B33360226BAD7FE0086D402 /* NodeLibraryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeLibraryCollectionViewController.swift; sourceTree = "<group>"; };
 		8B35935E26B9A8B400B7A2D6 /* UIResponder+handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+handle.swift"; sourceTree = "<group>"; };
 		8B35936026B9A96E00B7A2D6 /* UIViewController+handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+handle.swift"; sourceTree = "<group>"; };
 		8B35936226B9A9F000B7A2D6 /* CategorizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizedError.swift; sourceTree = "<group>"; };
@@ -44,6 +49,7 @@
 		8B35936926B9AC4100B7A2D6 /* DocumentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentError.swift; sourceTree = "<group>"; };
 		8B3E042226B72BD2007D689F /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		8B3E042726B73990007D689F /* Logger+Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+Loggable.swift"; sourceTree = "<group>"; };
+		8B42E85026BC8DF6009D1B7B /* NodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeCell.swift; sourceTree = "<group>"; };
 		8B4F51E126B93EEA003F9015 /* NKNodeViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NKNodeViewDelegate.swift; sourceTree = "<group>"; };
 		8B7EFF5426B947DE00DB2AB8 /* GenericNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericNode.swift; sourceTree = "<group>"; };
 		8B85199026B99A720007E01C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 				8BBB5C0126AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift */,
 				8BBB5C0326AEFBFD00F2CDC1 /* MainNavigationController.swift */,
 				8B85199026B99A720007E01C /* MainViewController.swift */,
+				8B33360226BAD7FE0086D402 /* NodeLibraryCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -127,6 +134,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		8B42E85226BC8EA2009D1B7B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8B42E85026BC8DF6009D1B7B /* NodeCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8B4A306326B85708004838A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				8B7EFF5426B947DE00DB2AB8 /* GenericNode.swift */,
+				8B33360026BAD4B20086D402 /* NodeList.swift */,
 			);
 			path = "Custom Nodes";
 			sourceTree = "<group>";
@@ -185,11 +201,12 @@
 		8BBB5BFE26AEFBFD00F2CDC1 /* SynthWorks */ = {
 			isa = PBXGroup;
 			children = (
-				8B7EFF5326B947B600DB2AB8 /* Custom Nodes */,
-				8BA7DFFB26B85B5200078E99 /* NodeKit */,
 				8B3E042526B736CF007D689F /* Controllers */,
+				8B7EFF5326B947B600DB2AB8 /* Custom Nodes */,
 				8B3E042626B73982007D689F /* Extensions */,
+				8BA7DFFB26B85B5200078E99 /* NodeKit */,
 				8B3E042426B736C0007D689F /* Models */,
+				8B42E85226BC8EA2009D1B7B /* Views */,
 				8BBB5BFF26AEFBFD00F2CDC1 /* AppDelegate.swift */,
 				8BBB5C0726AEFBFD00F2CDC1 /* Main.storyboard */,
 				8BBB5C0A26AEFBFE00F2CDC1 /* Assets.xcassets */,
@@ -285,11 +302,14 @@
 				8BBB5C0226AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift in Sources */,
 				8B85199126B99A720007E01C /* MainViewController.swift in Sources */,
 				8B35936A26B9AC4100B7A2D6 /* DocumentError.swift in Sources */,
+				8B33360126BAD4B20086D402 /* NodeList.swift in Sources */,
 				8B35936626B9AB0500B7A2D6 /* AppDelegate+handle.swift in Sources */,
 				8B939F9926B88B4700BFFD8F /* NKNodeView.swift in Sources */,
 				8BA7E00326B85B5200078E99 /* NKView.swift in Sources */,
 				8BBB5C0026AEFBFD00F2CDC1 /* AppDelegate.swift in Sources */,
+				8B33360326BAD7FE0086D402 /* NodeLibraryCollectionViewController.swift in Sources */,
 				8B35936826B9AB3000B7A2D6 /* Error+resolveCategory.swift in Sources */,
+				8B42E85126BC8DF6009D1B7B /* NodeCell.swift in Sources */,
 				8BC2A2C726B89BCA00047638 /* CGPoint+operators.swift in Sources */,
 				8BA7E00826B87D4300078E99 /* TestNode.swift in Sources */,
 				8B4F51E226B93EEA003F9015 /* NKNodeViewDelegate.swift in Sources */,

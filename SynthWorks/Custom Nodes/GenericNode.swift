@@ -8,10 +8,15 @@
 import UIKit
 
 class GenericNode: NKNode {
+    
+    required init(id: UUID = UUID(), position: NKCoordinate, size: NKCoordinate) {
+        self.id = id
+        self.position = position
+        self.size = size
+    }
+    
     var id: UUID
-    
     var position: NKCoordinate
-    
     var size: NKCoordinate
     
     func render(withUnitSize unit: CGFloat) -> UIView {
@@ -19,7 +24,7 @@ class GenericNode: NKNode {
         
         view.backgroundColor = .systemGray4
         
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = unit
         view.layer.cornerCurve = .continuous
         
         return view
