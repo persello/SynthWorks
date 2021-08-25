@@ -15,6 +15,7 @@ public class NKNodeView: UIView {
     public var delegate: NKNodeViewDelegate?
 
     // MARK: - Initializers
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -26,7 +27,6 @@ public class NKNodeView: UIView {
     public convenience init(from node: NKNode,
                             unitSize unit: CGFloat,
                             withDelegate delegate: NKNodeViewDelegate? = nil) {
-                
         let position = node.position
         let size = node.size
 
@@ -41,11 +41,14 @@ public class NKNodeView: UIView {
 
         // MARK: Move interaction
 
-        let moveGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(moveGestureAction))
-        addGestureRecognizer(moveGestureRecognizer)
+        if superview is NKGrid {
+            let moveGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(moveGestureAction))
+            addGestureRecognizer(moveGestureRecognizer)
+        }
     }
 
     // MARK: - Private functions
+
     private func repositionBasedOnNodeCoordinates(animated: Bool) {
         func reposition(coordinate: NKCoordinate, unitSize: CGFloat) {
             frame.origin.x = CGFloat(coordinate.x) * unitSize
@@ -70,8 +73,7 @@ public class NKNodeView: UIView {
     private func moveGestureAction(sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
-            
-            self.delegate?.dragStarted(for: self, from: node.position)
+            delegate?.dragStarted(for: self, from: node.position)
             dragStartCoordinates = node.position
             oldTouchLocation = sender.location(in: superview)
 
@@ -83,16 +85,15 @@ public class NKNodeView: UIView {
         case .ended,
              .failed,
              .cancelled:
-            
-            self.delegate?.dragEnded(for: self, from: dragStartCoordinates, to: node.position)
+            delegate?.dragEnded(for: self, from: dragStartCoordinates, to: node.position)
             dragStartCoordinates = .zero
             oldTouchLocation = .zero
 
-                let finalCoordinate = NKCoordinate(x: Int((frame.minX / unitSize).rounded()),
-                                                   y: Int((frame.minY / unitSize).rounded()))
-                                
-                node.position = finalCoordinate
-            
+            let finalCoordinate = NKCoordinate(x: Int((frame.minX / unitSize).rounded()),
+                                               y: Int((frame.minY / unitSize).rounded()))
+
+            node.position = finalCoordinate
+
             repositionBasedOnNodeCoordinates(animated: true)
 
         default:
@@ -100,4 +101,3 @@ public class NKNodeView: UIView {
         }
     }
 }
-

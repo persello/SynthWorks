@@ -17,13 +17,14 @@ class NodeLibraryCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let index = indexPath.item
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NodeCell", for: indexPath) as! NodeCell
         
-        cell.configure(name: String(describing: NodeList.allNodes[index].self),
+        cell.configure(name: String(describing: NodeList.allNodes[index].self) + "\(index)",
                        node: NodeList.allNodes[index].init(id: UUID(),
                                                            position: .zero,
-                                                           size: NKCoordinate(x: 4, y: 4)))
+                                                           size: NKCoordinate(x: 4 * (1 + index % 2), y: 4)))
+        
+        cell.layer.masksToBounds = false
         
         return cell
     }

@@ -113,29 +113,29 @@
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NodeCell" id="gM2-Tj-mVk" customClass="NodeCell" customModule="SynthWorks" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="264" height="284.5"/>
+                                <rect key="frame" x="24" y="0.0" width="264" height="296.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6fo-dU-JLT">
-                                    <rect key="frame" x="0.0" y="0.0" width="264" height="284.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="264" height="296.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gmg-NL-E3m">
-                                            <rect key="frame" x="12" y="12" width="240" height="260.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Gmg-NL-E3m">
+                                            <rect key="frame" x="12" y="12" width="240" height="272.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9P-JG-4Vh">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="240" id="0zE-AZ-OaU"/>
-                                                        <constraint firstAttribute="height" constant="240" id="Zjn-cK-X7T"/>
+                                                        <constraint firstAttribute="width" priority="750" constant="240" identifier="nodeViewWidthConstraint" id="0zE-AZ-OaU"/>
+                                                        <constraint firstAttribute="height" priority="750" constant="240" identifier="nodeViewHeightConstraint" id="Zjn-cK-X7T"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOi-aI-fFN">
-                                                    <rect key="frame" x="0.0" y="240" width="240" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="252" width="240" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -144,12 +144,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="centerY" secondItem="6fo-dU-JLT" secondAttribute="centerY" id="A1g-vf-kmX"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gmg-NL-E3m" secondAttribute="trailing" constant="12" id="IiJ-Xj-Pzk"/>
-                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6fo-dU-JLT" secondAttribute="leading" constant="12" id="Ozb-yV-GeU"/>
-                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="centerX" secondItem="6fo-dU-JLT" secondAttribute="centerX" id="UhH-Zy-opO"/>
-                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6fo-dU-JLT" secondAttribute="top" constant="12" id="Vdx-zt-Iej"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gmg-NL-E3m" secondAttribute="bottom" constant="12" id="fsF-Bd-fnX"/>
+                                        <constraint firstAttribute="trailing" secondItem="Gmg-NL-E3m" secondAttribute="trailing" constant="12" id="IiJ-Xj-Pzk"/>
+                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="leading" secondItem="6fo-dU-JLT" secondAttribute="leading" constant="12" id="Ozb-yV-GeU"/>
+                                        <constraint firstItem="Gmg-NL-E3m" firstAttribute="top" secondItem="6fo-dU-JLT" secondAttribute="top" constant="12" id="Vdx-zt-Iej"/>
+                                        <constraint firstAttribute="bottom" secondItem="Gmg-NL-E3m" secondAttribute="bottom" constant="12" id="fsF-Bd-fnX"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>

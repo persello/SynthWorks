@@ -19,7 +19,13 @@ class GenericNode: NKNode {
     var position: NKCoordinate
     var size: NKCoordinate
     
+    private weak var renderCache: UIView?
+    
     func render(withUnitSize unit: CGFloat) -> UIView {
+        if let renderCache = renderCache {
+            return renderCache
+        }
+        
         let view = NKNodeView(from: self, unitSize: unit, withDelegate: self)
         
         view.backgroundColor = .systemGray4
@@ -27,7 +33,23 @@ class GenericNode: NKNode {
         view.layer.cornerRadius = unit
         view.layer.cornerCurve = .continuous
         
+        view.layer.shadowRadius = 6
+        view.layer.shadowOffset = CGSize(width: 0, height: 6)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shouldRasterize = true
+        view.layer.rasterizationScale = view.window?.screen.scale ?? UIScreen.main.scale
+                
+        renderCache = view
+        
         return view
+    }
+    
+    // Exclude render cache
+    enum CodingKeys: String, CodingKey {
+        case id
+        case position
+        case size
     }
 }
 

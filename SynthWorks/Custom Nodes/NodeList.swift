@@ -8,5 +8,5 @@
 import Foundation
 
 struct NodeList {
-    static let allNodes: [NKNode.Type] = [GenericNode.self, TestNode.self, GenericNode.self, TestNode.self]
+    static let allNodes: [NKNode.Type] =  Array.init(repeating: GenericNode.self, count: 100)
 }
