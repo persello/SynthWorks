@@ -10,9 +10,12 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, Loggable {
-    var window: UIWindow?
+    /// Keeps track of the last opened document. Used for autosave features.
     var currentDocument: Document?
+    
+    /// Keeps track of the current view controller. This allows to display alerts at any time.
     var currentViewController: UIViewController?
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

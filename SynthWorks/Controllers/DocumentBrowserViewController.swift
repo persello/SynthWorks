@@ -8,6 +8,7 @@
 import os
 import UIKit
 
+// MARK: - Main class
 class DocumentBrowserViewController: UIDocumentBrowserViewController, Loggable {
     private var transitionController: UIDocumentBrowserTransitionController?
 
@@ -22,7 +23,9 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, Loggable {
     }
 }
 
+// MARK: - Transitioning delegate
 extension DocumentBrowserViewController: UIViewControllerTransitioningDelegate {
+    
     // Same transition controller for both presentation and dismissal.
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return transitionController
@@ -33,6 +36,7 @@ extension DocumentBrowserViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
+// MARK: - Delegate
 extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate {
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         logger.info("Document creation requested.")
@@ -80,8 +84,8 @@ extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate
     func presentDocument(at documentURL: URL) {
         logger.info("Presenting document at URL \"\(documentURL)\".")
 
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let navigationController = storyBoard.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
 
         let document = Document(fileURL: documentURL)
 

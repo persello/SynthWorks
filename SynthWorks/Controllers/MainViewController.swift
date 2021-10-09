@@ -13,6 +13,11 @@ class MainViewController: UIViewController {
     var returnToFileBrowserAction: ReturnToFileBrowserAction? = nil
     private var document: Document!
     
+    
+    /// Configures the Main view controller.
+    /// - Parameters:
+    ///   - document: The opened workspace.
+    ///   - action: The action to execute when tapping the document icon.
     func configure(withDocument document: Document, returnToFileBrowserAction action: ReturnToFileBrowserAction? = nil) {
         self.document = document
         self.returnToFileBrowserAction = action
@@ -21,7 +26,6 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func documentBrowserButtonAction(_ sender: UIBarButtonItem) {
-        
         returnToFileBrowserAction?()
     }
 }

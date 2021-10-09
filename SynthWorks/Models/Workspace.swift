@@ -8,6 +8,5 @@
 import Foundation
 
 class Workspace: NSObject, Codable {
-    var name: String?
     var version: Int? = 1
 }

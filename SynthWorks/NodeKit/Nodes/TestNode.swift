@@ -17,6 +17,7 @@ public class TestNode: NKNode {
     public var id: UUID
     public var position: NKCoordinate
     public var size: NKCoordinate
+    public var description: String = "Test Node"
 
     public func render(withUnitSize unit: CGFloat) -> UIView {
         let view = NKNodeView(from: self, unitSize: unit, withDelegate: self)

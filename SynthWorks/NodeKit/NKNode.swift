@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol NKNode: Codable {
+public protocol NKNode: Codable, CustomStringConvertible {
     
     init(id: UUID, position: NKCoordinate, size: NKCoordinate)
     
@@ -16,4 +16,10 @@ public protocol NKNode: Codable {
     var size: NKCoordinate { get }
 
     func render(withUnitSize unit: CGFloat) -> UIView
+}
+
+extension NKNode {
+    var description: String {
+        "Node"
+    }
 }

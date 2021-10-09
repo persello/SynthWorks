@@ -18,6 +18,7 @@ class GenericNode: NKNode {
     var id: UUID
     var position: NKCoordinate
     var size: NKCoordinate
+    var description: String = "Generic Node"
     
     private weak var renderCache: UIView?
     
@@ -30,11 +31,11 @@ class GenericNode: NKNode {
         
         view.backgroundColor = .systemGray4
         
-        view.layer.cornerRadius = unit
+        view.layer.cornerRadius = unit / 2
         view.layer.cornerCurve = .continuous
         
-        view.layer.shadowRadius = 6
-        view.layer.shadowOffset = CGSize(width: 0, height: 6)
+        view.layer.shadowRadius = 4
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shouldRasterize = true

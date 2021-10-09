@@ -12,6 +12,8 @@ extension UIResponder {
     func handle(_ error: Error,
                 from viewController: UIViewController,
                 retryHandler: (() -> Void)?) {
+        
+        // Try to pass the error down the responder chain.
         guard let nextResponder = next else {
             return assertionFailure("Unhandled error \(error) from \(viewController).")
         }

@@ -16,13 +16,13 @@ class NodeCell: UICollectionViewCell {
     private var renderedNode: NKNode? = nil
     
     func configure(name: String, node: NKNode) {
-        nodeNameLabel.text = name
+        nodeNameLabel.text = name.uppercased()
         
         let innerView: UIView!
         
         if renderedNode?.id != node.id {
             for view in nodeView.subviews { view.removeFromSuperview() }
-            innerView = node.render(withUnitSize: 25)
+            innerView = node.render(withUnitSize: 30)
             nodeView.addSubview(innerView)
             renderedNode = node
         } else {

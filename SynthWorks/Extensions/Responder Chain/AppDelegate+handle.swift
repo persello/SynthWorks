@@ -9,6 +9,12 @@ import os
 import UIKit
 
 extension AppDelegate {
+    
+    /// Handles errors that aren't handled by any other view by showing an alert.
+    /// - Parameters:
+    ///   - error: The error to display.
+    ///   - viewController: Optionally, pass a `UIViewController` if there's one available. Otherwise, if we are (for example) in the document browser, a new window and a new controlled are created. A `UIViewController` is necessary to display an alert.
+    ///   - retryHandler: What to do if the error is a `CategorizedError` and of type `.retryable`.
     override func handle(_ error: Error, from viewController: UIViewController?, retryHandler: (() -> Void)?) {
         
         var alertContainingViewController: UIViewController
@@ -19,10 +25,11 @@ extension AppDelegate {
         } else {
             let delegate = UIApplication.shared.delegate as! AppDelegate
                 
-            // Se non è zuppa è pan bagnato
+            // Se non è zuppa è pan bagnato.
             alertContainingViewController = delegate.currentViewController ?? (delegate.window?.rootViewController)!
         }
         
+        // Create a logger from the controller name. It won't make any sense if we are outside a controller.
         let logger: Logger = Logger(category: String(describing: type(of: alertContainingViewController)))
         logger.error("\(error.localizedDescription)")
         
@@ -35,7 +42,7 @@ extension AppDelegate {
         if error.resolveCategory() != .fatal {
             alert.addAction(UIAlertAction(
                 title: "Dismiss",
-                style: .default
+                style: .cancel
             ))
         }
         

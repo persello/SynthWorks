@@ -9,7 +9,6 @@ import UIKit
 
 class NodeLibraryCollectionViewController: UICollectionViewController {
  
-    
     // MARK: - UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return NodeList.allNodes.count
@@ -19,10 +18,10 @@ class NodeLibraryCollectionViewController: UICollectionViewController {
         let index = indexPath.item
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NodeCell", for: indexPath) as! NodeCell
         
-        cell.configure(name: String(describing: NodeList.allNodes[index].self) + "\(index)",
-                       node: NodeList.allNodes[index].init(id: UUID(),
-                                                           position: .zero,
-                                                           size: NKCoordinate(x: 4 * (1 + index % 2), y: 4)))
+        let node = NodeList.allNodes[index].init(id: UUID(), position: .zero, size: NKCoordinate(x: 4, y: 4))
+        
+        cell.configure(name: "\(node) \(index)",
+                       node: node)
         
         cell.layer.masksToBounds = false
         

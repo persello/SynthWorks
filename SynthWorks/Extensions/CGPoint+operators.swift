@@ -7,6 +7,8 @@
 
 import CoreGraphics
 
+// Simple algebric operations on CGPoints.
+
 extension CGPoint {
     static func +(rhs: Self, lhs: Self) -> Self {
         return CGPoint(x: rhs.x + lhs.x, y: rhs.y + lhs.y)

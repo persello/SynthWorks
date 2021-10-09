@@ -8,6 +8,8 @@
 import UIKit
 
 class MainNavigationController: UINavigationController {
+    
+    /// The current, opened workspace.
     var document: Document?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +32,8 @@ class MainNavigationController: UINavigationController {
         })
     }
 
-    @IBAction func dismissNavigationController() {
+    /// Go back to the document browser.
+    func dismissNavigationController() {
         dismiss(animated: true) {
             
             // Set the current view controller back to document browser for displaying "unowned" alerts.
