@@ -28,6 +28,11 @@
 		8BA7E00326B85B5200078E99 /* NKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7DFFF26B85B5200078E99 /* NKView.swift */; };
 		8BA7E00826B87D4300078E99 /* TestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7E00726B87D4300078E99 /* TestNode.swift */; };
 		8BA7E00A26B87F4900078E99 /* NKCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7E00926B87F4900078E99 /* NKCoordinate.swift */; };
+		8BB7443927123D70009E83DE /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8BB7443827123D70009E83DE /* swiftgen.yml */; };
+		8BB7443E27123EF1009E83DE /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB7443D27123EF1009E83DE /* Strings+Generated.swift */; };
+		8BB7444227123F4F009E83DE /* IB-Segues+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB7443F27123F4F009E83DE /* IB-Segues+Generated.swift */; };
+		8BB7444327123F4F009E83DE /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB7444027123F4F009E83DE /* XCAssets+Generated.swift */; };
+		8BB7444427123F4F009E83DE /* IB-Scenes+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB7444127123F4F009E83DE /* IB-Scenes+Generated.swift */; };
 		8BBB5C0026AEFBFD00F2CDC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBB5BFF26AEFBFD00F2CDC1 /* AppDelegate.swift */; };
 		8BBB5C0226AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBB5C0126AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift */; };
 		8BBB5C0426AEFBFD00F2CDC1 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBB5C0326AEFBFD00F2CDC1 /* MainNavigationController.swift */; };
@@ -60,6 +65,11 @@
 		8BA7DFFF26B85B5200078E99 /* NKView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NKView.swift; sourceTree = "<group>"; };
 		8BA7E00726B87D4300078E99 /* TestNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNode.swift; sourceTree = "<group>"; };
 		8BA7E00926B87F4900078E99 /* NKCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NKCoordinate.swift; sourceTree = "<group>"; };
+		8BB7443827123D70009E83DE /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		8BB7443D27123EF1009E83DE /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
+		8BB7443F27123F4F009E83DE /* IB-Segues+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IB-Segues+Generated.swift"; sourceTree = "<group>"; };
+		8BB7444027123F4F009E83DE /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
+		8BB7444127123F4F009E83DE /* IB-Scenes+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IB-Scenes+Generated.swift"; sourceTree = "<group>"; };
 		8BBB5BFC26AEFBFD00F2CDC1 /* SynthWorks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynthWorks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BBB5BFF26AEFBFD00F2CDC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BBB5C0126AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -181,9 +191,21 @@
 			path = Nodes;
 			sourceTree = "<group>";
 		};
+		8BB7443C27123EF1009E83DE /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				8BB7444127123F4F009E83DE /* IB-Scenes+Generated.swift */,
+				8BB7443F27123F4F009E83DE /* IB-Segues+Generated.swift */,
+				8BB7443D27123EF1009E83DE /* Strings+Generated.swift */,
+				8BB7444027123F4F009E83DE /* XCAssets+Generated.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		8BBB5BF326AEFBFD00F2CDC1 = {
 			isa = PBXGroup;
 			children = (
+				8BB7443827123D70009E83DE /* swiftgen.yml */,
 				8BBB5BFE26AEFBFD00F2CDC1 /* SynthWorks */,
 				8BBB5BFD26AEFBFD00F2CDC1 /* Products */,
 				8B4A306326B85708004838A3 /* Frameworks */,
@@ -204,8 +226,9 @@
 				8B3E042526B736CF007D689F /* Controllers */,
 				8B7EFF5326B947B600DB2AB8 /* Custom Nodes */,
 				8B3E042626B73982007D689F /* Extensions */,
-				8BA7DFFB26B85B5200078E99 /* NodeKit */,
+				8BB7443C27123EF1009E83DE /* Generated */,
 				8B3E042426B736C0007D689F /* Models */,
+				8BA7DFFB26B85B5200078E99 /* NodeKit */,
 				8B42E85226BC8EA2009D1B7B /* Views */,
 				8BBB5BFF26AEFBFD00F2CDC1 /* AppDelegate.swift */,
 				8BBB5C0726AEFBFD00F2CDC1 /* Main.storyboard */,
@@ -223,6 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BBB5C1226AEFBFE00F2CDC1 /* Build configuration list for PBXNativeTarget "SynthWorks" */;
 			buildPhases = (
+				8BB74445271240E7009E83DE /* ShellScript */,
 				8BBB5BF826AEFBFD00F2CDC1 /* Sources */,
 				8BBB5BF926AEFBFD00F2CDC1 /* Frameworks */,
 				8BBB5BFA26AEFBFD00F2CDC1 /* Resources */,
@@ -281,10 +305,31 @@
 				8BBB5C0E26AEFBFE00F2CDC1 /* LaunchScreen.storyboard in Resources */,
 				8BBB5C0B26AEFBFE00F2CDC1 /* Assets.xcassets in Resources */,
 				8BBB5C0926AEFBFD00F2CDC1 /* Main.storyboard in Resources */,
+				8BB7443927123D70009E83DE /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8BB74445271240E7009E83DE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "if which swiftgen >/dev/null; then\n  swiftgen\nelse\n  echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8BBB5BF826AEFBFD00F2CDC1 /* Sources */ = {
@@ -297,10 +342,13 @@
 				8B35936126B9A96E00B7A2D6 /* UIViewController+handle.swift in Sources */,
 				8BBB5C0426AEFBFD00F2CDC1 /* MainNavigationController.swift in Sources */,
 				8B35935F26B9A8B400B7A2D6 /* UIResponder+handle.swift in Sources */,
+				8BB7444327123F4F009E83DE /* XCAssets+Generated.swift in Sources */,
 				8B3E042326B72BD2007D689F /* Workspace.swift in Sources */,
 				8BA7E00226B85B5200078E99 /* NKNode.swift in Sources */,
 				8BBB5C0226AEFBFD00F2CDC1 /* DocumentBrowserViewController.swift in Sources */,
 				8B85199126B99A720007E01C /* MainViewController.swift in Sources */,
+				8BB7444427123F4F009E83DE /* IB-Scenes+Generated.swift in Sources */,
+				8BB7444227123F4F009E83DE /* IB-Segues+Generated.swift in Sources */,
 				8B35936A26B9AC4100B7A2D6 /* DocumentError.swift in Sources */,
 				8B33360126BAD4B20086D402 /* NodeList.swift in Sources */,
 				8B35936626B9AB0500B7A2D6 /* AppDelegate+handle.swift in Sources */,
@@ -311,6 +359,7 @@
 				8B35936826B9AB3000B7A2D6 /* Error+resolveCategory.swift in Sources */,
 				8B42E85126BC8DF6009D1B7B /* NodeCell.swift in Sources */,
 				8BC2A2C726B89BCA00047638 /* CGPoint+operators.swift in Sources */,
+				8BB7443E27123EF1009E83DE /* Strings+Generated.swift in Sources */,
 				8BA7E00826B87D4300078E99 /* TestNode.swift in Sources */,
 				8B4F51E226B93EEA003F9015 /* NKNodeViewDelegate.swift in Sources */,
 				8B35936326B9A9F000B7A2D6 /* CategorizedError.swift in Sources */,

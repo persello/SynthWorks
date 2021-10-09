@@ -84,8 +84,7 @@ extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate
     func presentDocument(at documentURL: URL) {
         logger.info("Presenting document at URL \"\(documentURL)\".")
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
+        let navigationController = StoryboardScene.Main.mainNavigationController.instantiate()
 
         let document = Document(fileURL: documentURL)
 
