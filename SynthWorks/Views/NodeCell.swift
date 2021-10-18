@@ -8,15 +8,31 @@
 import UIKit
 
 class NodeCell: UICollectionViewCell {
+    typealias ModalVisibilityControllerFunction = (() -> Void)
     @IBOutlet var nodeNameLabel: UILabel!
     @IBOutlet var nodeView: UIView!
     @IBOutlet var nodeViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet var nodeViewHeightConstraint: NSLayoutConstraint!
     
+    private var controlModalVisibility: ModalVisibilityControllerFunction?
     private var renderedNode: NKNode? = nil
+    weak var connectedNode: NKNode?
     
-    func configure(name: String, node: NKNode) {
-        nodeNameLabel.text = name.uppercased()
+    override func dragStateDidChange(_ dragState: UICollectionViewCell.DragState) {
+        if dragState == .dragging {
+            controlModalVisibility?()
+        }
+    }
+    
+    
+    /// Configures the current cell in order to show the specified node.
+    /// - Parameters:
+    ///   - node: The selected node.
+    ///   - modalVisibility: A function to control the library modal visibility. Used to hide the modal on drag start.
+    func configure(node: NKNode, modalVisibility: ModalVisibilityControllerFunction? = nil) {
+        nodeNameLabel.text = node.description.uppercased()
+        controlModalVisibility = modalVisibility
+        connectedNode = node
         
         let innerView: UIView!
         

@@ -36,13 +36,23 @@ public class NKView: UIScrollView {
         scrollsToTop = false
 
         delegate = self
+        
+        self.addInteraction(UIDropInteraction(delegate: self))
 
         addSubview(backgroundGrid)
     }
     
+    private func realToIntegerCoordinates(_ inputCoordinate: CGPoint) -> NKCoordinate {
+        let offsetInputCoordinate = inputCoordinate + self.contentOffset
+        let x: Int = Int((offsetInputCoordinate.x / backgroundGrid.gridSpacing * self.contentScaleFactor))
+        let y: Int = Int((offsetInputCoordinate.y / backgroundGrid.gridSpacing * self.contentScaleFactor))
+        return NKCoordinate(x: x, y: y)
+    }
+    
     // MARK: - Public functions
     
-    public func add(node: NKNode) {
+    public func add(node: NKNode, position: NKCoordinate = .zero) {
+        node.position = position
         nodes.append(node)
         
         let view = node.render(withUnitSize: backgroundGrid.gridSpacing)
@@ -54,6 +64,33 @@ public class NKView: UIScrollView {
 extension NKView: UIScrollViewDelegate {
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return backgroundGrid
+    }
+}
+
+extension NKView: UIDropInteractionDelegate {
+    
+    public func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.hasItemsConforming(toTypeIdentifiers: ["sy.node"])
+    }
+    
+    public func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+    
+    public func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        let location: CGPoint = session.location(in: self)
+        session.loadObjects(ofClass: GenericNode.self) { nodes in
+            if let nodes = nodes as? [GenericNode] {
+                let dropCoordinate = self.realToIntegerCoordinates(location)
+                nodes.forEach({
+                    let centeredCoordinate = NKCoordinate(
+                        x: dropCoordinate.x - $0.size.x/2,
+                        y: dropCoordinate.y + $0.size.y/2
+                    )
+                    self.add(node: $0, position: centeredCoordinate)
+                })
+            }
+        }
     }
 }
 

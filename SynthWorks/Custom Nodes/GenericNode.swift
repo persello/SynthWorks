@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenericNode: NKNode {
+class GenericNode: NSObject, NKNode {
     
     required init(id: UUID = UUID(), position: NKCoordinate, size: NKCoordinate) {
         self.id = id
@@ -18,7 +18,9 @@ class GenericNode: NKNode {
     var id: UUID
     var position: NKCoordinate
     var size: NKCoordinate
-    var description: String = "Generic Node"
+    override var description: String {
+        "Generic Node"
+    }
     
     private weak var renderCache: UIView?
     
@@ -27,7 +29,7 @@ class GenericNode: NKNode {
             return renderCache
         }
         
-        let view = NKNodeView(from: self, unitSize: unit, withDelegate: self)
+        let view = NKNodeView(from: self, unitSize: unit/*, withDelegate: self*/)
         
         view.backgroundColor = .systemGray4
         
@@ -54,16 +56,37 @@ class GenericNode: NKNode {
     }
 }
 
-extension GenericNode: NKNodeViewDelegate {
-    public func dragStarted(for node: NKNodeView, from startCoordinate: NKCoordinate) {
-        UIView.animate(withDuration: 0.3) {
-            node.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        }
+// MARK: - Node view delegate
+
+//extension GenericNode: NKNodeViewDelegate {
+//
+//}
+
+// MARK: - NSItemProvider Protocols
+
+extension GenericNode: NSItemProviderReading {
+    static var readableTypeIdentifiersForItemProvider: [String] {
+        return [Self.nodeUTI]
     }
     
-    public func dragEnded(for node: NKNodeView, from startCoordinate: NKCoordinate, to endCoordinate: NKCoordinate) {
-        UIView.animate(withDuration: 0.3) {
-            node.transform = CGAffineTransform(scaleX: 1, y: 1)
+    static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> Self {
+        return try JSONDecoder().decode(self, from: data)
+    }
+}
+
+extension GenericNode: NSItemProviderWriting {
+    static var writableTypeIdentifiersForItemProvider: [String] {
+        return [Self.nodeUTI]
+    }
+    
+    func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        do {
+            let json = try JSONEncoder().encode(self)
+            completionHandler(json, nil)
+        } catch {
+            completionHandler(nil, error)
         }
+        
+        return .none
     }
 }

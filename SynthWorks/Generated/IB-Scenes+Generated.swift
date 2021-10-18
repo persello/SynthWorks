@@ -27,6 +27,8 @@ internal enum StoryboardScene {
     internal static let mainNavigationController = SceneType<MainNavigationController>(storyboard: Main.self, identifier: "MainNavigationController")
 
     internal static let mainViewController = SceneType<MainViewController>(storyboard: Main.self, identifier: "MainViewController")
+
+    internal static let nodeLibraryNavigationController = SceneType<UIKit.UINavigationController>(storyboard: Main.self, identifier: "NodeLibraryNavigationController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

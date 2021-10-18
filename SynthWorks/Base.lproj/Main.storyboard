@@ -86,7 +86,7 @@
         <!--Node Library Navigation Controller-->
         <scene sceneID="xOx-7t-odj">
             <objects>
-                <navigationController title="Node Library Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="sFZ-TA-tgz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NodeLibraryNavigationController" title="Node Library Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="sFZ-TA-tgz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="prZ-nG-Abs">
                         <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>

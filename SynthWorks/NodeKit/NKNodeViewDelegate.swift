@@ -7,7 +7,4 @@
 
 import Foundation
 
-public protocol NKNodeViewDelegate {
-    func dragStarted(for node: NKNodeView, from startCoordinate: NKCoordinate)
-    func dragEnded(for node: NKNodeView, from startCoordinate: NKCoordinate, to endCoordinate: NKCoordinate)
-}
+// public protocol NKNodeViewDelegate {}

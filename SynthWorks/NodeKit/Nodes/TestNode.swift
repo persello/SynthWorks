@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class TestNode: NKNode {
+public class TestNode: NSObject, NKNode {
     required public init(id: UUID = UUID(), position: NKCoordinate, size: NKCoordinate) {
         self.id = id
         self.position = position
@@ -17,26 +17,50 @@ public class TestNode: NKNode {
     public var id: UUID
     public var position: NKCoordinate
     public var size: NKCoordinate
-    public var description: String = "Test Node"
+    
+    public override var description: String {
+        "Test Node"
+    }
 
     public func render(withUnitSize unit: CGFloat) -> UIView {
-        let view = NKNodeView(from: self, unitSize: unit, withDelegate: self)
+        let view = NKNodeView(from: self, unitSize: unit/*, withDelegate: self*/)
         view.backgroundColor = .red
         
         return view
     }
 }
 
-extension TestNode: NKNodeViewDelegate {
-    public func dragStarted(for node: NKNodeView, from startCoordinate: NKCoordinate) {
-        UIView.animate(withDuration: 0.3) {
-            node.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        }
+// MARK: - Node view delegate
+
+//extension TestNode: NKNodeViewDelegate {
+//
+//}
+
+// MARK: - NSItemProvider Protocols
+
+extension TestNode: NSItemProviderReading {
+    public static var readableTypeIdentifiersForItemProvider: [String] {
+        return [Self.nodeUTI]
     }
     
-    public func dragEnded(for node: NKNodeView, from startCoordinate: NKCoordinate, to endCoordinate: NKCoordinate) {
-        UIView.animate(withDuration: 0.3) {
-            node.transform = CGAffineTransform(scaleX: 1, y: 1)
+    public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> Self {
+        return try JSONDecoder().decode(self, from: data)
+    }
+}
+
+extension TestNode: NSItemProviderWriting {
+    public static var writableTypeIdentifiersForItemProvider: [String] {
+        return [Self.nodeUTI]
+    }
+    
+    public func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        do {
+            let json = try JSONEncoder().encode(self)
+            completionHandler(json, nil)
+        } catch {
+            completionHandler(nil, error)
         }
+        
+        return .none
     }
 }

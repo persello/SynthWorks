@@ -246,7 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BBB5C1226AEFBFE00F2CDC1 /* Build configuration list for PBXNativeTarget "SynthWorks" */;
 			buildPhases = (
-				8BB74445271240E7009E83DE /* ShellScript */,
+				8BB74445271240E7009E83DE /* SwiftGen */,
 				8BBB5BF826AEFBFD00F2CDC1 /* Sources */,
 				8BBB5BF926AEFBFD00F2CDC1 /* Frameworks */,
 				8BBB5BFA26AEFBFD00F2CDC1 /* Resources */,
@@ -312,7 +312,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8BB74445271240E7009E83DE /* ShellScript */ = {
+		8BB74445271240E7009E83DE /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -321,13 +321,14 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftGen;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "if which swiftgen >/dev/null; then\n  swiftgen\nelse\n  echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+			shellScript = "if which swiftgen >/dev/null; then\n  swiftgen\nelse\n  echo \"SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
