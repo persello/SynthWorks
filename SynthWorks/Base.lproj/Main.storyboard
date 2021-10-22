@@ -74,7 +74,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="sG2-01-tf9">
                             <connections>
-                                <segue destination="sFZ-TA-tgz" kind="presentation" id="zPR-fo-vtN"/>
+                                <segue destination="sFZ-TA-tgz" kind="presentation" identifier="NodeLibrarySegue" id="zPR-fo-vtN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -128,6 +128,9 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LABEL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOi-aI-fFN">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="rzh-bs-Xxn"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>

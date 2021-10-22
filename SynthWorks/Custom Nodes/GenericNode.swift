@@ -22,14 +22,14 @@ class GenericNode: NSObject, NKNode {
         "Generic Node"
     }
     
-    private weak var renderCache: UIView?
+    private weak var renderCache: NKNodeView?
     
-    func render(withUnitSize unit: CGFloat) -> UIView {
+    func render(withUnitSize unit: CGFloat) -> NKNodeView {
         if let renderCache = renderCache {
             return renderCache
         }
         
-        let view = NKNodeView(from: self, unitSize: unit/*, withDelegate: self*/)
+        let view = NKNodeView(from: self, unitSize: unit)
         
         view.backgroundColor = .systemGray4
         
@@ -38,6 +38,7 @@ class GenericNode: NSObject, NKNode {
         
         view.layer.shadowRadius = 4
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowPath = CGPath(roundedRect: CGRect(origin: .zero, size: view.frame.size), cornerWidth: unit/2, cornerHeight: unit/2, transform: .none)
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shouldRasterize = true

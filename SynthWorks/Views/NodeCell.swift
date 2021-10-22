@@ -8,41 +8,33 @@
 import UIKit
 
 class NodeCell: UICollectionViewCell {
-    typealias ModalVisibilityControllerFunction = (() -> Void)
     @IBOutlet var nodeNameLabel: UILabel!
     @IBOutlet var nodeView: UIView!
     @IBOutlet var nodeViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet var nodeViewHeightConstraint: NSLayoutConstraint!
     
-    private var controlModalVisibility: ModalVisibilityControllerFunction?
     private var renderedNode: NKNode? = nil
     weak var connectedNode: NKNode?
-    
-    override func dragStateDidChange(_ dragState: UICollectionViewCell.DragState) {
-        if dragState == .dragging {
-            controlModalVisibility?()
-        }
-    }
     
     
     /// Configures the current cell in order to show the specified node.
     /// - Parameters:
     ///   - node: The selected node.
     ///   - modalVisibility: A function to control the library modal visibility. Used to hide the modal on drag start.
-    func configure(node: NKNode, modalVisibility: ModalVisibilityControllerFunction? = nil) {
+    func configure(node: NKNode, modalVisibility: @escaping (Bool) -> Void) {
         nodeNameLabel.text = node.description.uppercased()
-        controlModalVisibility = modalVisibility
         connectedNode = node
         
-        let innerView: UIView!
+        let innerView: NKNodeView!
         
         if renderedNode?.id != node.id {
             for view in nodeView.subviews { view.removeFromSuperview() }
             innerView = node.render(withUnitSize: 30)
+            innerView.controlModal = modalVisibility
             nodeView.addSubview(innerView)
             renderedNode = node
         } else {
-            innerView = nodeView.subviews.first
+            innerView = nodeView.subviews.first as? NKNodeView
         }
         
         // Adapt container to node render

@@ -15,7 +15,7 @@ public protocol NKNode: NSObject, NSItemProviderReading, NSItemProviderWriting, 
     var position: NKCoordinate { get set }
     var size: NKCoordinate { get }
         
-    func render(withUnitSize unit: CGFloat) -> UIView
+    func render(withUnitSize unit: CGFloat) -> NKNodeView
 }
 
 extension NKNode {

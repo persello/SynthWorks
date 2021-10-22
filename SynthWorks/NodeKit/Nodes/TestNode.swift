@@ -22,7 +22,7 @@ public class TestNode: NSObject, NKNode {
         "Test Node"
     }
 
-    public func render(withUnitSize unit: CGFloat) -> UIView {
+    public func render(withUnitSize unit: CGFloat) -> NKNodeView {
         let view = NKNodeView(from: self, unitSize: unit/*, withDelegate: self*/)
         view.backgroundColor = .red
         

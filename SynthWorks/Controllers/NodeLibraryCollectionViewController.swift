@@ -11,7 +11,6 @@ class NodeLibraryCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.dragDelegate = self
     }
     
     /// Returns the correct node for the specified `indexPath`.
@@ -23,8 +22,16 @@ class NodeLibraryCollectionViewController: UICollectionViewController {
     
     
     /// A function that can be passed to the cell configuration in order to dismiss the modal when the drag starts,
-    private func hideModal() {
-        dismiss(animated: true, completion: {})
+    private func controlModal(visible: Bool) {
+        if !visible && !isBeingDismissed {
+            dismiss(animated: true, completion: nil)
+        } else if visible {
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                if let controller = delegate.currentViewController as? MainNavigationController {
+                    controller.present(StoryboardScene.Main.nodeLibraryNavigationController.instantiate(), animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     // MARK: - UICollectionViewDataSource
@@ -37,8 +44,7 @@ class NodeLibraryCollectionViewController: UICollectionViewController {
         
         let node: NKNode = getNode(for: indexPath)
         
-        cell.configure(node: node,
-                       modalVisibility: hideModal)
+        cell.configure(node: node, modalVisibility: controlModal)
         
         cell.layer.masksToBounds = false
         
@@ -46,28 +52,4 @@ class NodeLibraryCollectionViewController: UICollectionViewController {
     }
     
     // MARK: - UICollectionViewDelegate
-}
-
-extension NodeLibraryCollectionViewController: UICollectionViewDragDelegate {
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let cell = collectionView.cellForItem(at: indexPath)! as! NodeCell
-        guard let node = cell.connectedNode else {
-            return []
-        }
-        
-        let nodeView = cell.nodeView.subviews.first ?? cell
-        let provider = NSItemProvider(object: node)
-        provider.suggestedName = node.description
-        let dragItem = UIDragItem(itemProvider: provider)
-        dragItem.localObject = node
-        dragItem.previewProvider = {
-            return UIDragPreview(view: nodeView)
-        }
-        return [dragItem]
-    }
-    
-    // It makes no sense to drag a node to another app.
-    func collectionView(_ collectionView: UICollectionView, dragSessionIsRestrictedToDraggingApplication session: UIDragSession) -> Bool {
-        return true
-    }
 }
