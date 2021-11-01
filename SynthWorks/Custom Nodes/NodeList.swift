@@ -8,5 +8,15 @@
 import Foundation
 
 struct NodeList {
-    static let allNodes: [NKNode.Type] =  Array.init(repeating: GenericNode.self, count: 100)
+    static let allNodes: [GenericNode.Type] = Array.init(repeating: GenericNode.self, count: 100)
+    
+    static func getType(for key: String) -> GenericNode.Type? {
+        for type in allNodes {
+            if String(describing: type) == key {
+                return type
+            }
+        }
+        
+        return nil
+    }
 }

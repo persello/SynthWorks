@@ -26,7 +26,6 @@
 		8BA7E00126B85B5200078E99 /* NKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7DFFD26B85B5200078E99 /* NKDelegate.swift */; };
 		8BA7E00226B85B5200078E99 /* NKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7DFFE26B85B5200078E99 /* NKNode.swift */; };
 		8BA7E00326B85B5200078E99 /* NKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7DFFF26B85B5200078E99 /* NKView.swift */; };
-		8BA7E00826B87D4300078E99 /* TestNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7E00726B87D4300078E99 /* TestNode.swift */; };
 		8BA7E00A26B87F4900078E99 /* NKCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7E00926B87F4900078E99 /* NKCoordinate.swift */; };
 		8BB7443927123D70009E83DE /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8BB7443827123D70009E83DE /* swiftgen.yml */; };
 		8BB7443E27123EF1009E83DE /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB7443D27123EF1009E83DE /* Strings+Generated.swift */; };
@@ -63,7 +62,6 @@
 		8BA7DFFD26B85B5200078E99 /* NKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NKDelegate.swift; sourceTree = "<group>"; };
 		8BA7DFFE26B85B5200078E99 /* NKNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NKNode.swift; sourceTree = "<group>"; };
 		8BA7DFFF26B85B5200078E99 /* NKView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NKView.swift; sourceTree = "<group>"; };
-		8BA7E00726B87D4300078E99 /* TestNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNode.swift; sourceTree = "<group>"; };
 		8BA7E00926B87F4900078E99 /* NKCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NKCoordinate.swift; sourceTree = "<group>"; };
 		8BB7443827123D70009E83DE /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		8BB7443D27123EF1009E83DE /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 		8B7EFF5326B947B600DB2AB8 /* Custom Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				8B7EFF5426B947DE00DB2AB8 /* GenericNode.swift */,
 				8B33360026BAD4B20086D402 /* NodeList.swift */,
 			);
 			path = "Custom Nodes";
@@ -186,7 +183,7 @@
 		8BA7E00626B87D3A00078E99 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				8BA7E00726B87D4300078E99 /* TestNode.swift */,
+				8B7EFF5426B947DE00DB2AB8 /* GenericNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 				8B42E85126BC8DF6009D1B7B /* NodeCell.swift in Sources */,
 				8BC2A2C726B89BCA00047638 /* CGPoint+operators.swift in Sources */,
 				8BB7443E27123EF1009E83DE /* Strings+Generated.swift in Sources */,
-				8BA7E00826B87D4300078E99 /* TestNode.swift in Sources */,
 				8B4F51E226B93EEA003F9015 /* NKNodeViewDelegate.swift in Sources */,
 				8B35936326B9A9F000B7A2D6 /* CategorizedError.swift in Sources */,
 				8BA7E00A26B87F4900078E99 /* NKCoordinate.swift in Sources */,

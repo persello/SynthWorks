@@ -16,14 +16,11 @@ public protocol NKNode: NSObject, NSItemProviderReading, NSItemProviderWriting, 
     var size: NKCoordinate { get }
         
     func render(withUnitSize unit: CGFloat) -> NKNodeView
+    func invalidateRenderCache()
 }
 
 extension NKNode {
-    var description: String {
-        "Node"
-    }
-    
     static var nodeUTI: String {
-        "sy.node"
+        "nk.node"
     }
 }

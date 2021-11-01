@@ -10,10 +10,8 @@ import UIKit
 public class NKNodeView: UIView {
     private var node: NKNode!
     private var unitSize: CGFloat!
-    private var oldTouchLocation: CGPoint = .zero
-    private var dragStartCoordinates: NKCoordinate = .zero
-
-    public var controlModal: ((Bool) -> Void)?
+    
+    var delegate: NKNodeViewDelegate?
     
     // MARK: - Initializers
 
@@ -64,12 +62,12 @@ extension NKNodeView: UIDragInteractionDelegate {
     }
     
     public func dragInteraction(_ interaction: UIDragInteraction, sessionWillBegin session: UIDragSession) {
-        controlModal?(false)
+        delegate?.nodeView(node, isBeingDraggedIntoCanvas: true)
     }
     
     public func dragInteraction(_ interaction: UIDragInteraction, session: UIDragSession, didEndWith operation: UIDropOperation) {
         if operation == .copy {
-            controlModal?(true)
+            delegate?.nodeView(node, isBeingDraggedIntoCanvas: false)
         }
     }
 }

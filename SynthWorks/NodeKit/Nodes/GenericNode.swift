@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenericNode: NSObject, NKNode {
+class GenericNode: NSObject, NKNode, Codable {
     
     required init(id: UUID = UUID(), position: NKCoordinate, size: NKCoordinate) {
         self.id = id
@@ -18,11 +18,30 @@ class GenericNode: NSObject, NKNode {
     var id: UUID
     var position: NKCoordinate
     var size: NKCoordinate
+    
+    // MARK: NSObject overrides
     override var description: String {
-        "Generic Node"
+        return "Generic Node"
     }
     
+    override var debugDescription: String {
+        return "\(String(describing: type(of: self))) (\(self.id.uuidString))"
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let node = object as? GenericNode {
+            return node.id == self.id
+        }
+        
+        return false
+    }
+ 
+    // MARK: Rendering
     private weak var renderCache: NKNodeView?
+    
+    func invalidateRenderCache() {
+        renderCache = nil
+    }
     
     func render(withUnitSize unit: CGFloat) -> NKNodeView {
         if let renderCache = renderCache {
