@@ -9,6 +9,10 @@ import UIKit
 
 class NodeLibraryCollectionViewController: UICollectionViewController {
     
+    @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

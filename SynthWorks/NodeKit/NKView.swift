@@ -106,10 +106,7 @@ extension NKView: UIDropInteractionDelegate {
             if let nodes = nodes as? [GenericNode] {
                 let dropCoordinate = self.realToIntegerCoordinates(location)
                 nodes.forEach({ node in
-                    let centeredCoordinate = NKCoordinate(
-                        x: dropCoordinate.x - node.size.x/2,
-                        y: dropCoordinate.y - node.size.y/2
-                    )
+                    let centeredCoordinate = dropCoordinate - node.size / 2
                     
                     if nodes.contains(node) {
                         self.move(node: node, newPosition: centeredCoordinate)

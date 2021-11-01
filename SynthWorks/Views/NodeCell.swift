@@ -16,7 +16,6 @@ class NodeCell: UICollectionViewCell {
     private var renderedNode: NKNode? = nil
     weak var connectedNode: NKNode?
     
-    
     /// Configures the current cell in order to show the specified node.
     /// - Parameters:
     ///   - node: The selected node.
@@ -40,5 +39,21 @@ class NodeCell: UICollectionViewCell {
         // Adapt container to node render
         nodeViewWidthConstraint.constant = innerView.frame.width
         nodeViewHeightConstraint.constant = innerView.frame.height
+        
+        // Tap animation
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateTap)))
+    }
+    
+    @objc private func animateTap() {
+        let animation = CASpringAnimation(keyPath: #keyPath(CALayer.transform))
+        animation.valueFunction = CAValueFunction(name: CAValueFunctionName.translateY)
+        animation.fromValue = 0
+        animation.toValue = -25
+        animation.duration = 0.15
+        animation.autoreverses = true
+        animation.stiffness = 0
+        
+        // Target the actual node
+        nodeView.subviews.first?.layer.add(animation, forKey: nil)
     }
 }
